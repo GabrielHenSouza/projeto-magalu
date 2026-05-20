@@ -1,0 +1,124 @@
+:root{
+	--bg:#f6f7fb;
+	--card:#fff;
+	--muted:#6b7280;
+	--accent:#ff4d6d; /* magalu-ish */
+	--accent-dark:#d43b55;
+		/* caminho da imagem de fundo. Use url(...) aqui para compatibilidade ampla */
+		--bg-image: url("images/background.jpg"); /* trocar aqui para alterar a imagem de fundo */
+	--glass: rgba(255,255,255,0.8);
+	--radius:12px;
+	--shadow: 0 6px 18px rgba(16,24,40,0.08);
+	font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+	margin:0;
+	background: linear-gradient(180deg,var(--bg),#ffffff);
+	position:relative;
+	color:#111827;
+	-webkit-font-smoothing:antialiased;
+	-moz-osx-font-smoothing:grayscale;
+}
+
+/* Full-page background image (subtle, behind content) */
+body::before{
+	content: '';
+	position: fixed;
+	inset: 0;
+	/* variável já contém url(...), então podemos aplicá-la diretamente */
+	background-image: var(--bg-image);
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+		opacity: 0.28; /* mais visível */
+	z-index: 0;
+	pointer-events: none;
+	filter: saturate(0.95) contrast(0.98);
+}
+
+/* Hero section with prominent preview image */
+.hero{
+	display:flex;align-items:flex-end;gap:1rem;padding:2.5rem;border-radius:12px;background-size:cover;background-position:center;min-height:220px;color:#fff;position:relative;overflow:hidden;margin-bottom:1rem}
+.hero::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.18),rgba(0,0,0,0.45));pointer-events:none}
+.hero h1,.hero p{position:relative;z-index:2}
+.hero{background-image: url('images/background.jpg')}
+
+/* ensure main content sits above the background */
+.container, .site-header, .site-footer, .cart, .modal-content{
+	position: relative; z-index: 1;
+}
+
+.container{max-width:1100px;margin:0 auto;padding:1rem}
+
+.site-header{background:var(--card);box-shadow:var(--shadow);position:sticky;top:0;z-index:40}
+.header-inner{display:flex;align-items:center;gap:1rem;justify-content:space-between;padding:0.75rem 0}
+.logo{font-weight:800;color:var(--accent);text-decoration:none;font-size:1.25rem}
+
+.search-wrap{flex:1;max-width:540px;margin:0 1rem}
+.search-wrap input{width:100%;padding:0.55rem 0.75rem;border-radius:10px;border:1px solid #e6e9f0;background:transparent}
+
+.nav-actions{display:flex;gap:.5rem;align-items:center}
+.cart-btn{background:transparent;border:1px solid #e6e9f0;padding:0.45rem 0.75rem;border-radius:10px;cursor:pointer}
+.cart-count{background:var(--accent);color:#fff;padding:0.15rem 0.45rem;border-radius:999px;margin-right:.5rem;font-weight:700}
+
+.hero{padding:2rem 0 1rem}
+.hero h1{margin:.25rem 0;font-size:1.6rem}
+.hero p{margin:0;color:var(--muted)}
+
+.controls{display:flex;justify-content:space-between;padding:.5rem 0}
+.filters{display:flex;gap:1rem;flex-wrap:wrap}
+.filters label{display:flex;flex-direction:column;font-size:0.85rem;color:var(--muted)}
+.filters select{margin-top:0.4rem;padding:0.4rem;border-radius:8px;border:1px solid #e6e9f0}
+
+.products-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin:1rem 0}
+
+.card{background:var(--card);border-radius:var(--radius);padding:0.8rem;box-shadow:var(--shadow);display:flex;flex-direction:column;cursor:pointer}
+.card img{width:100%;height:160px;object-fit:cover;border-radius:10px;display:block;opacity:0;transition:opacity .36s ease}
+
+/* Diminuir um pouco a imagem da geladeira (produto p3) */
+.card[data-id="p3"] img{height:130px}
+
+/* Corrige rotação/orientação específica da imagem da geladeira (produto p3) */
+/* (Nenhuma regra específica para a geladeira; usa o estilo padrão de `.card img`) */
+
+/* skeleton placeholder while image carrega */
+.skeleton{position:relative;overflow:hidden;background:linear-gradient(90deg,#f3f4f6 25%,#eceff6 37%,#f3f4f6 63%);background-size:400% 100%;animation:shimmer 1.2s linear infinite;border-radius:10px}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.card h3{margin:0.6rem 0 0.25rem;font-size:1rem}
+.price{color:var(--accent);font-weight:700}
+.card .meta{display:flex;justify-content:space-between;align-items:center;margin-top:auto}
+.btn{border:0;padding:0.5rem 0.8rem;border-radius:8px;cursor:pointer}
+.btn.primary{background:var(--accent);color:#fff}
+.btn.ghost{background:transparent;border:1px solid #e6e9f0}
+
+/* Cart sidebar */
+.cart{position:fixed;right:-420px;top:0;height:100%;width:380px;background:var(--card);box-shadow:-20px 0 50px rgba(2,6,23,0.12);transition:right .28s;z-index:60;display:flex;flex-direction:column}
+.cart.open{right:0}
+.cart-header{display:flex;justify-content:space-between;align-items:center;padding:1rem;border-bottom:1px solid #f1f2f6}
+.cart-items{flex:1;overflow:auto;padding:1rem}
+.cart-item{display:flex;gap:0.75rem;align-items:center;padding:.5rem 0;border-bottom:1px dashed #f1f2f6}
+.cart-item img{width:64px;height:56px;object-fit:cover;border-radius:8px}
+.qty-controls{display:flex;align-items:center;gap:0.5rem}
+.cart-footer{padding:1rem;border-top:1px solid #f1f2f6}
+
+.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(5,8,20,0.45);z-index:70}
+.modal.open{display:flex}
+.modal-content{background:var(--card);border-radius:12px;max-width:820px;width:94%;padding:1rem;box-shadow:var(--shadow)}
+.modal-close{background:transparent;border:0;font-size:1.25rem;position:absolute;right:16px;top:16px;cursor:pointer}
+
+.site-footer{padding:2rem 0;color:var(--muted);text-align:center}
+
+/* responsive */
+@media (max-width:900px){
+	.products-grid{grid-template-columns:repeat(2,1fr)}
+	.search-wrap{max-width:360px}
+}
+@media (max-width:560px){
+	.header-inner{gap:.5rem}
+	.products-grid{grid-template-columns:1fr}
+	.container{padding:0.75rem}
+	.cart{width:100%;right:-100%}
+}

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="pt-BR">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<title>Magalu - Loja Demo (nível pleno)</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<header class="site-header">
+			<div class="container header-inner">
+				<a class="logo" href="#">MAGALU</a>
+				<div class="search-wrap">
+					<input id="search" type="search" placeholder="Buscar produtos, marcas e mais..." aria-label="Buscar" />
+				</div>
+				<nav class="nav-actions">
+					<button id="btn-cart" aria-label="Abrir carrinho" class="cart-btn">
+						<span class="cart-count" id="cart-count">0</span>
+						Carrinho
+					</button>
+				</nav>
+			</div>
+		</header>
+
+		<main class="container">
+			<section class="hero">
+				<h1>Ofertas selecionadas</h1>
+				<p>Produtos com ótimo custo-benefício. Teste a versão demo.</p>
+			</section>
+
+
+			<section class="controls">
+				<div class="filters">
+					<label>
+						Categoria
+						<select id="category-filter">
+							<option value="all">Todas</option>
+						</select>
+					</label>
+					<label>
+						Ordenar
+						<select id="sort-select">
+							<option value="default">Recomendado</option>
+							<option value="price-asc">Preço: menor</option>
+							<option value="price-desc">Preço: maior</option>
+							<option value="name-asc">Nome A–Z</option>
+						</select>
+					</label>
+				</div>
+			</section>
+
+			<section id="products" class="products-grid" aria-live="polite">
+				<!-- Produtos serão renderizados pelo JS -->
+			</section>
+		</main>
+
+		<!-- Cart sidebar -->
+		<aside id="cart" class="cart" aria-hidden="true">
+			<div class="cart-header">
+				<h2>Seu carrinho</h2>
+				<button id="close-cart" aria-label="Fechar">×</button>
+			</div>
+			<div id="cart-items" class="cart-items"></div>
+			<div class="cart-footer">
+				<div class="total">Total: R$ <span id="cart-total">0.00</span></div>
+				<div class="cart-actions">
+					<button id="clear-cart" class="btn ghost">Esvaziar</button>
+					<button id="checkout" class="btn primary">Finalizar compra</button>
+				</div>
+			</div>
+		</aside>
+
+		<!-- Product modal -->
+		<div id="modal" class="modal" aria-hidden="true">
+			<div class="modal-content" role="dialog" aria-modal="true">
+				<button class="modal-close" id="modal-close" aria-label="Fechar">×</button>
+				<div id="modal-body"></div>
+			</div>
+		</div>
+
+		<footer class="site-footer container">
+			<p>Demo criada para fins de aprendizado — Magalu style (não oficial).</p>
+		</footer>
+
+		<script src="js/script.js"></script>
+	</body>
+</html>
+
